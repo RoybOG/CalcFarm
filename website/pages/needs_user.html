@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello!</title>
+    <meta charset="utf-8">
+    
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js" defer></script>
+  </head>  
+  <body>
+     %rebase(base_file,route_dict = nav_route_dict, current_route=nav_current_route)
+ 	    
+    <p>To enter "{{prev_route}}" you need to enter a username.</p>
+    <a href="/login" target="_top" onClick="writelink();">Click here to log in.</a> <br>
+    <a href="/signup" target="_top" onClick="writelink();">If you don't have an account, sign up here.</a>
+    <script>
+    	function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+						}
+
+	function writelink(){
+		createCookie("prev_route", "/"+"{{prev_route}}",1)
+	
+	}
+    </script>
+  </body>
+</html>

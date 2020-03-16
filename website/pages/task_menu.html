@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+ul.tasks {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+}
+
+li a.tasks {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+  background-color: #555;
+  color: white;
+}
+</style>
+</head>
+<style>
+#site_title{
+	text-align:center; 
+	text-decoration:underline; 
+}
+
+</style>
+<body>
+     %rebase(base_file,route_dict = nav_route_dict, current_route=nav_current_route)
+<h3>{{task}}</h3>
+    <ul class="tasks">    
+    <li><a class="tasks" href="/tasks/{{task}}/task_edit" target="_top" >edit task </a></li>
+    </ul>
+  </body>
+</html>

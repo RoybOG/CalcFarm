@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello!</title>
+    <meta charset="utf-8">
+    
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js" defer></script>
+  </head>  
+  <body>
+     %rebase(base_file,route_dict = nav_route_dict, current_route=nav_current_route)
+	    
+    
+    <p>
+      Enter your username and password:
+    </p>
+
+    %include(base_form_file,base_form_details=form_details, base_post_route=post_route, base_has_text_line=has_text_line)
+    <br>
+    <a href="/signup" target="_top">If you don't have an account, create one!</a>
+  </body>
+</html>

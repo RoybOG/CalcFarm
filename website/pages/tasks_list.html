@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+table.tasks {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+}
+
+th a.tasks {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+td a.tasks {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+th a:hover {
+  background-color: #555;
+  color: white;
+}
+
+
+td a:hover {
+  background-color: #555;
+  color: white;
+}
+</style>
+<body>
+     %rebase(base_file,route_dict = nav_route_dict, current_route=nav_current_route)
+<h2>Tasks</h2>    
+<a class="tasks" href="/tasks/running_tasks" target="_top" >check running tasks</a>
+    %if task_list: 	    
+    <table class="tasks">    
+    %for task in task_list:
+    <tr>
+    <th><a class="tasks" href="/tasks/{{task}}/task_menu" target="_top">{{task}} </a></th>
+    <td><a class="tasks" href="/tasks/{{task}}/task_run" target="_top"  onClick="writelink();">run </a></td>
+<td><a class="tasks" href="/tasks/{{task}}/cancel_task" target="_top"  onClick="writelink();">cancel </a></td>
+    </tr>
+    %end
+    </table>
+    %end
+
+     <a class="tasks" href="/tasks/create_task" target="_top" >new task</a>
+     <script>
+    	function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+						}
+
+	function writelink(){
+		createCookie("prev_route", "/tasks/menu",1)
+	}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!--<link rel="stylesheet" href="/style.css">-->
+<style>
+ul.nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li.nav {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+li a.nav {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+</style>
+</head>
+<style>
+#site_title{
+	text-align:center; 
+	text-decoration:underline; 
+}
+
+</style>
+<body>
+<h1 id="site_title">CalcFarm</h1>
+%if user_name:
+<p id="user_greeting">
+Welcome back, {{user_name}}!
+</p>
+%end
+<!--<p id = "current_page"></p>-->
+<ul class="nav">
+	% for route_link, route_data in route_dict.items():
+		%if route_data['route_type'] == 'navigation_page':
+		%if 'button_direction' in route_data:
+			%if route_data['button_direction']=='right':
+		<li style="float:right" class="nav"><a  class="nav" href=/{{route_link}}>{{route_data['link_name']}}</a></li>
+			%else:
+		<li  class="nav"><a  class="nav" href=/{{route_link}}>{{route_data['link_name']}}</a></li>
+			%end
+		%else:
+		<li  class="nav"><a  class="nav" href=/{{route_link}}>{{route_data['link_name']}}</a></li>
+		%end
+		%end
+		%end
+</ul>
+<script>
+      var link_selector = "a[href='" + window.location.pathname + "']"
+      current_link = document.querySelectorAll(link_selector)[0]; 
+      if (current_link!=null){
+        current_link.classList.add('active');
+        //var v = document.getElementsByClassName("active")[0];
+        //document.getElementById("current_page").innerHTML = "Page location is " + window.location.pathname;
+        document.getElementsByTagName("title")[0].innerHTML = current_link.innerHTML
+      }else{
+         //document.getElementById("current_page").innerHTML = "Error";
+        
+      }
+</script>
+
+
+{{!base}}
+
+
+</body>
+</html>
