@@ -215,6 +215,12 @@ def close_session():
     response.set_cookie("sid", "", path="/")
 
 
+def link_handler():
+    img_picture = 'stinky.jpg'
+    img_url = '/images/'+img_picture
+    return {'image_url': img_url}
+
+
 def get_to_url():
     url = request.get_cookie("prev_route")
     #response.delete_cookie("prev_route")
@@ -256,6 +262,9 @@ routes = {
              'handling_function': form_handler,
              'args': ('/input/task_form', Db.task_form_details,
                       {'task_name': 'Default_TaskName', 'first_num': 0, 'last_num': 100})},
+
+    'img_link': {'link_name': 'free link', 'html_file_name': 'img.html', 'route_type': 'navigation_page',
+                 'handling_function': link_handler},
 
     'signup': {'link_name': 'signup', 'html_file_name': 'signup.html', 'route_type': 'navigation_page',
              'handling_function': form_handler, 'button_direction': 'right',

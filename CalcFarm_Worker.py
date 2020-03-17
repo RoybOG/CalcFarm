@@ -133,6 +133,7 @@ def connect_to_route(route_url, server_address, input_list=None):
     :return: the output from the server- a JSON file the was converted to a dictionary.
     (all the clients to the server communicate to it using JSON files as a part of the protocol)
     """
+    print(ServerURL)
     if input_list is None:
         input_list = []
 
@@ -201,7 +202,11 @@ def worker_sign_up():
     global ServerURL
     global task_exe_name
     global conditional
-    task = recieve_data_from_server("get_task", [username], MainServerURL)
+    task = recieve_data_from_server("get_task", [username], MainServerURL)["task"]
+    while task is None:
+        time.sleep(5)
+        task = recieve_data_from_server("get_task", [username], MainServerURL)["task"]
+
     task_exe_name, conditional = task["exe_name"], task["Task_conditional"]
     server_ip = task["server_ip"]
     ServerURL = "http://" + server_ip + ':' + str(PORT) + "/communication/worker"
@@ -341,10 +346,10 @@ def worker_task_calc():
         while work_status != WorkerWorkStatusNames.finished_work.value:
             print('Started working...')
             work_unit = get_work_unit()
+            print('Got work unit...')
             if work_unit is None:
                 time.sleep(5)
             else:
-                print('Got work unit...')
                 first_num = work_unit['first_num']
                 last_num = work_unit['last_num']
                 print('Started Calculating...')

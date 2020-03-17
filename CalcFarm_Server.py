@@ -425,6 +425,9 @@ def getworkunit(worker_id):
 
     return package_data({"fail_message": work_status})
 
+@route('/lol')
+def a():
+    return "lol"
 
 @post('/communication/worker/update/<worker_id>')
 def update(worker_id):
